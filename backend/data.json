@@ -1,0 +1,129 @@
+{
+  "categories": [
+    {
+      "name": "portrait"
+    },
+    {
+      "name": "Events"
+    },
+    {
+      "name": "Sport"
+    },
+    {
+      "name": "Nature"
+    },
+    {
+      "name": "Fashion"
+    },
+    {
+      "name": "wedding"
+    }
+  ],
+  "files": [
+    {
+      "filename": "1738170752474.jpg",
+      "category": "portrait",
+      "published": true
+    },
+    {
+      "filename": "1738250066190.jpg",
+      "category": "Events",
+      "published": true
+    },
+    {
+      "filename": "1738525327472.jpeg",
+      "category": "Sport",
+      "published": true
+    },
+    {
+      "filename": "1738525349613.jpeg",
+      "category": "Sport",
+      "published": true
+    },
+    {
+      "filename": "1738525384887.jpg",
+      "category": "Nature",
+      "published": true
+    },
+    {
+      "filename": "1738525399908.jpg",
+      "category": "Nature",
+      "published": true
+    },
+    {
+      "filename": "1738525623672.jpg",
+      "category": "Nature",
+      "published": true
+    },
+    {
+      "filename": "1738525655339.jpg",
+      "category": "Nature",
+      "published": true
+    },
+    {
+      "filename": "1738525743081.jpeg",
+      "category": "Fashion",
+      "published": true
+    },
+    {
+      "filename": "1738525753768.jpeg",
+      "category": "Fashion",
+      "published": true
+    },
+    {
+      "filename": "1738525771291.jpg",
+      "category": "Fashion",
+      "published": true
+    },
+    {
+      "filename": "1738525790827.jpeg",
+      "category": "Fashion",
+      "published": true
+    },
+    {
+      "filename": "1738525814393.jpg",
+      "category": "wedding",
+      "published": true
+    },
+    {
+      "filename": "1738525829413.jpg",
+      "category": "wedding",
+      "published": true
+    },
+    {
+      "filename": "1738525839996.jpg",
+      "category": "wedding",
+      "published": true
+    },
+    {
+      "filename": "1738525855222.jpg",
+      "category": "wedding",
+      "published": true
+    },
+    {
+      "filename": "1738525886463.jpg",
+      "category": "portrait",
+      "published": true
+    },
+    {
+      "filename": "1738525917266.jpg",
+      "category": "portrait",
+      "published": true
+    },
+    {
+      "filename": "1738525931694.jpg",
+      "category": "portrait",
+      "published": true
+    },
+    {
+      "filename": "1738525957472.jpg",
+      "category": "Events",
+      "published": true
+    },
+    {
+      "filename": "1738526006853.jpg",
+      "category": "Events",
+      "published": true
+    }
+  ]
+}
