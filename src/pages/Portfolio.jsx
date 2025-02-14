@@ -19,7 +19,7 @@ function Portfolio() {
   
             // Associer les fichiers aux catégories
             const categoriesWithFiles = categoriesData.map(category => ({
-              ...category,
+              ...category, 
               images: files.filter(file => file.category === category.name && file.published) // Filtrer les fichiers publiés
             }));
   
