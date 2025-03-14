@@ -43,9 +43,9 @@ const uploadDir = "uploads";
 
 // Middleware
 app.use(cors({
-  origin: "http://localhost:5173", // ✅ Autorise uniquement ton frontend
+  origin: "http://localhost:5173", 
   methods: ["GET", "POST", "PUT", "DELETE"],
-  credentials: true // ✅ Permet d'envoyer les cookies et tokens
+  credentials: true // envoyer les cookies et tokens
 }));
 
 

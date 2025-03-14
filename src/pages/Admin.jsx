@@ -21,7 +21,7 @@ const Admin = ({ setToken }) => {
   const [showPasswordUpdate, setShowPasswordUpdate] = useState(false);
 
   const navigate = useNavigate();
-  const apiUrl = "http://localhost:5000";
+  const apiUrl = process.env.REACT_APP_API_URL;
 
 
   // Charger les catégories au démarrage
@@ -454,7 +454,7 @@ console.log("📢 Catégorie sélectionnée pour affichage :", selectedCategory)
               {files.map((file) => (
                 <div key={file.id} className="border p-3 rounded-lg shadow-md bg-gray-50">
                   <img
-                    src={`http://localhost:5000/uploads/${file.filename}`}
+                    src={`apiUrl/uploads/${file.filename}`}
                     alt={file.filename}
                     className="w-full h-40 object-cover rounded mb-2"
                   />
