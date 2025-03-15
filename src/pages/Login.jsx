@@ -23,7 +23,7 @@ function Login({ setToken }) {
   
     try {
       const response = await axios.post(`${apiUrl}/login`, { email, password }, {
-        headers: { "Content-Type": "application/json","Authorization": `Bearer ${localStorage.getItem("token")}` }
+        headers: { "Content-Type": "application/json" }
       });
       const token=response.data.token;
       console.log("Réponse du serveur:", response.data);

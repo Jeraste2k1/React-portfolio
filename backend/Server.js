@@ -45,6 +45,7 @@ const uploadDir = "uploads";
 app.use(cors({
   origin: ["http://localhost:5173", "https://react-portfolio-sand-phi.vercel.app"],
   methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true
 }));
 
@@ -134,40 +135,35 @@ function isAdmin(req, res, next) {
 
 
 // Routes d'authentification
-app.post("/login", 
-  body('email').isEmail().normalizeEmail(),
-  body('password').isLength({ min: 6 }),
-  async (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ error: "❌ Email ou mot de passe invalide." });
+app.post("/login", async (req, res) => {
+  console.log("🔐 Tentative de connexion :", req.body);
+
+  try {
+    const { email, password } = req.body;
+    const user = await prisma.user.findUnique({ where: { email } });
+
+    if (!user) {
+      return res.status(401).json({ error: "❌ Cet email n'existe pas." });
     }
 
-    try {
-      const { email, password } = req.body;
-      const user = await prisma.user.findUnique({ where: { email } });
-
-      if (!user) {
-        return res.status(401).json({ error: "❌ Cet email n'existe pas." });
-      }
-
-      const passwordMatch = await bcrypt.compare(password, user.password);
-      if (!passwordMatch) {
-        return res.status(401).json({ error: "❌ Mot de passe incorrect." });
-      }
-
-      if (user.role !== "ADMIN") {
-        return res.status(403).json({ error: "⛔ Accès refusé, vous n'êtes pas administrateur." });
-      }
-
-      const token = jwt.sign({ email: user.email, role: user.role }, SECRET_KEY, { expiresIn: "1h" });
-      res.json({ token });
-    } catch (error) {
-      console.error("❌ Erreur lors de la connexion :", error);
-      res.status(500).json({ error: "Erreur serveur, veuillez réessayer plus tard." });
+    const passwordMatch = await bcrypt.compare(password, user.password);
+    if (!passwordMatch) {
+      return res.status(401).json({ error: "❌ Mot de passe incorrect." });
     }
+
+    if (user.role !== "ADMIN") {
+      return res.status(403).json({ error: "⛔ Accès refusé, vous n'êtes pas administrateur." });
+    }
+
+    const token = jwt.sign({ email: user.email, role: user.role }, SECRET_KEY, { expiresIn: "1h" });
+
+    res.json({ token });
+  } catch (error) {
+    console.error("❌ Erreur lors de la connexion :", error);
+    res.status(500).json({ error: "Erreur serveur, veuillez réessayer plus tard." });
   }
-);
+});
+
 
 
 // Routes administratives
