@@ -42,11 +42,23 @@ const SECRET_KEY = process.env.SECRET_KEY;
 const uploadDir = "uploads";
 
 // Middleware
+const allowedOrigins = [
+  "http://localhost:5173", // Pour le dev local
+  "https://react-portfolio-sand-phi.vercel.app/" //  URL Vercel
+];
+
 app.use(cors({
-  origin: "http://localhost:5173", 
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("❌ Accès non autorisé par CORS"));
+    }
+  },
   methods: ["GET", "POST", "PUT", "DELETE"],
-  credentials: true // envoyer les cookies et tokens
+  credentials: true
 }));
+
 
 
 app.use(express.json());

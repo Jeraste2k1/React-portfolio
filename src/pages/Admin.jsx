@@ -453,11 +453,12 @@ console.log("📢 Catégorie sélectionnée pour affichage :", selectedCategory)
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mt-4">
               {files.map((file) => (
                 <div key={file.id} className="border p-3 rounded-lg shadow-md bg-gray-50">
-                  <img
-                    src={`apiUrl/uploads/${file.filename}`}
-                    alt={file.filename}
-                    className="w-full h-40 object-cover rounded mb-2"
-                  />
+                 <img
+  src={`${apiUrl}/uploads/${file.filename}`}
+  alt={file.filename}
+  className="w-full h-40 object-cover rounded mb-2"
+/>
+
                   <Typography variant="small" className="mb-2">
                     {file.filename}
                   </Typography>
