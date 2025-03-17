@@ -34,7 +34,7 @@ function Header() {
           <Link to="/contact" className="hover:text-gray-500">
             Contact
           </Link>
-          <Link to="/Login" className="hover:text-gray-500">
+          <Link to="/login" className="hover:text-gray-500">
           <UserIcon className="w-6 h-6 text-black" />
           </Link>
         </nav>
