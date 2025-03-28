@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import photo from "../assets/img/richly logo.jpg"
 
 function About() {
   return (
@@ -10,7 +11,7 @@ function About() {
       <div>
         <figure data-aos="zoom-in-left">
           <img
-            src="src/assets/img/richly logo.jpg"
+            src={photo}
             className="w-full h-auto md:w-2/3 md:h-[30rem] object-cover rounded-lg mx-auto"
             alt="photographer"
           />
