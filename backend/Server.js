@@ -43,7 +43,7 @@ const uploadDir = "uploads";
 
 // Middleware
 app.use(cors({
-  origin: ["http://localhost:5173", "https://react-portfolio-sand-phi.vercel.app"],
+  origin: ["http://localhost:5173", "https://react-portfolio-p69c.onrender.com"],
   methods: ["GET", "POST", "PUT", "DELETE"],
   allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true
