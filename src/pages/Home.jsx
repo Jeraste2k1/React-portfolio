@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import photo from "/assets/img/women standing wall.jpg" 
+
 
 function Home() {
   return (
@@ -62,7 +62,7 @@ function Home() {
     <figure className="bannerimg relative">
      
       <img 
-        src={photo}
+        src="img/women_standing_wall.jpg" 
         className="img-fluid w-full h-auto object-cover rounded-lg" 
         alt="photographer"
       />
