@@ -21,7 +21,8 @@ const Admin = ({ setToken }) => {
   const [showPasswordUpdate, setShowPasswordUpdate] = useState(false);
 
   const navigate = useNavigate();
-  const apiUrl = process.env.REACT_APP_API_URL;
+  const apiUrl = "http://localhost:5000";
+
 
 
   // Charger les catégories au démarrage
@@ -33,7 +34,8 @@ const Admin = ({ setToken }) => {
 }, [files]);
 useEffect(() => {
   const checkTokenExpiration = () => {
-    const token = localStorage.getItem("token");
+    const token =  sessionStorage.getItem("token");
+;
     const expiration = localStorage.getItem("token_expiration");
 
     if (token && expiration) {
@@ -73,7 +75,8 @@ useEffect(() => {
       const response = await axios.post(
         `${apiUrl}/change-email`,
         { newEmail },
-        { headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } }
+        { headers: { Authorization: `Bearer ${ sessionStorage.getItem("token")
+}` } }
       );
   
       toast.success(" Email mis à jour !");
@@ -106,7 +109,8 @@ useEffect(() => {
       const response = await axios.post(
         `${apiUrl}/change-password`,
         { newPassword, confirmPassword },
-        { headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } }
+        { headers: { Authorization: `Bearer ${ sessionStorage.getItem("token")
+}` } }
       );
   
       toast.success("Mot de passe mis à jour !");
@@ -122,18 +126,17 @@ useEffect(() => {
   
     setLoadingPassword(false);
   };
-  
 
   const fetchCategories = async () => {
     try {
       const res = await axios.get(`${apiUrl}/categories`);
-      console.log("Catégories récupérées:", res.data); // Pour debugger
       setCategories(res.data);
     } catch (error) {
-      toast.error(" Erreur lors de la récupération des catégories");
-      setErrorMessage("Erreur lors de la récupération des catégories");
+      console.error("Erreur lors de la récupération des catégories:", error.response?.data || error);
+      toast.error("❌ Impossible de charger les catégories.");
     }
   };
+  
   
 
   // Charger les fichiers de la catégorie sélectionnée
@@ -156,7 +159,8 @@ useEffect(() => {
 //Suppression de fichier prévisaliser
 const removeFile = (index) => {
   setFileInput((prevFiles) => prevFiles.filter((_, i) => i !== index)); // ✅ Supprime du tableau des fichiers
-  setFilePreview((prevPreviews) => prevPreviews.filter((_, i) => i !== index)); // ✅ Supprime de la prévisualisation
+  setFilePreview(selectedFiles.map(file => URL.createObjectURL(file)));
+ // ✅ Supprime de la prévisualisation
 };
 
 
@@ -176,7 +180,8 @@ const removeFile = (index) => {
         { name: newCategory },
         {
           headers: {
-            "Authorization": `Bearer ${localStorage.getItem("token")}`,
+            "Authorization": `Bearer ${ sessionStorage.getItem("token")
+}`,
             "Content-Type": "application/json"
           }
         }
@@ -211,7 +216,8 @@ const removeFile = (index) => {
       
       await axios.delete(`${apiUrl}/categories/${categoryName}`, {
         headers: {
-          "Authorization": `Bearer ${localStorage.getItem("token")}`,
+          "Authorization": `Bearer ${ sessionStorage.getItem("token")
+}`,
           "Content-Type": "application/json"
         }
       });
@@ -269,7 +275,8 @@ const removeFile = (index) => {
   
       await axios.post(`${apiUrl}/upload`, formData, {
         headers: {
-          "Authorization": `Bearer ${localStorage.getItem("token")}`
+          "Authorization": `Bearer ${ sessionStorage.getItem("token")
+}`
         }
       });
   
@@ -292,15 +299,18 @@ const removeFile = (index) => {
 
   // Bascule du statut "published" d'un fichier en utilisant son ID
   const togglePublish = async (fileId) => {  // fileId est censé être filename
-    console.log("📤 Token envoyé dans le header :", localStorage.getItem("token"));
-    console.log("🔑 Token stocké dans localStorage :", localStorage.getItem("token"));
+    console.log("📤 Token envoyé dans le header :",  sessionStorage.getItem("token")
+);
+    console.log("🔑 Token stocké dans localStorage :",  sessionStorage.getItem("token")
+);
   
     try {
       await axios.put(
         `${apiUrl}/files/publish/${fileId}`, // ✅ Utiliser fileId ici
         {},
         { 
-          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+          headers: { Authorization: `Bearer ${ sessionStorage.getItem("token")
+}` },
           withCredentials: true,
           "Content-Type": "application/json"
         }
@@ -326,7 +336,8 @@ const removeFile = (index) => {
       console.log("🗑️ Suppression du fichier avec l'ID :", fileId);
       
       await axios.delete(`${apiUrl}/files/${fileId}`, {
-        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+        headers: { Authorization: `Bearer ${ sessionStorage.getItem("token")
+}` },
       });
       toast.success(" Fichier supprimé avec succès !");
       fetchFiles(selectedCategory);

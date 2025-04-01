@@ -12,7 +12,7 @@ import Contact from "./pages/Contact";
 import Login from "./pages/Login";
 import Admin from "./pages/Admin";
 
-const API_BASE_URL = process.env.REACT_APP_API_URL;
+const API_BASE_URL = "http://localhost:5000";
 
 
 function App() {

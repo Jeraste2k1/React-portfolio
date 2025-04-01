@@ -11,7 +11,7 @@ function Login({ setToken }) {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
-  const apiUrl = process.env.REACT_APP_API_URL;
+  const apiUrl ="http://localhost:5000";
 
 
   const handleLogin = async (e) => {

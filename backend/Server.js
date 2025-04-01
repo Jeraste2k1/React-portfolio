@@ -43,11 +43,10 @@ const uploadDir = "uploads";
 
 // Middleware
 app.use(cors({
-  origin: ["http://localhost:5173", "https://react-portfolio-p69c.onrender.com"],
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  allowedHeaders: ["Content-Type", "Authorization"],
+  origin: process.env.NODE_ENV === "production" ? "https://reactphotography.netlify.app" : "http://localhost:5173",
   credentials: true
 }));
+
 
 
 
@@ -126,12 +125,12 @@ function authenticateToken(req, res, next) {
 
 
 function isAdmin(req, res, next) {
-  console.log("Utilisateur authentifié :", req.user);
-  if (req.user.role !== 'ADMIN') {
+  if (!req.user || req.user.role !== 'ADMIN') {
     return res.status(403).json({ message: 'Accès interdit' });
   }
   next();
 }
+
 
 
 // Routes d'authentification
@@ -155,7 +154,7 @@ app.post("/login", async (req, res) => {
       return res.status(403).json({ error: "⛔ Accès refusé, vous n'êtes pas administrateur." });
     }
 
-    const token = jwt.sign({ email: user.email, role: user.role }, SECRET_KEY, { expiresIn: "1h" });
+    const token = jwt.sign({ id: user.id, email: user.email, role: user.role }, SECRET_KEY, { expiresIn: "1h" });
 
     res.json({ token });
   } catch (error) {
