@@ -21,7 +21,7 @@ const Admin = ({ setToken }) => {
   const [showPasswordUpdate, setShowPasswordUpdate] = useState(false);
 
   const navigate = useNavigate();
-  const apiUrl = "http://localhost:5000";
+  const apiUrl = "https://react-portfolio-bqbn.onrender.com";
 
 
 
