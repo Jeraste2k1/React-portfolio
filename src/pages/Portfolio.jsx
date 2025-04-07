@@ -41,6 +41,7 @@ function Portfolio() {
     fetchCategoriesAndFiles();
   }, []);
 
+  // Trouver la catégorie sélectionnée
   const categoryObj = categories.find((cat) => cat.name === selectedCategory);
   const displayedImages = categoryObj ? categoryObj.images : categories.flatMap((cat) => cat.images);
 
@@ -76,6 +77,7 @@ function Portfolio() {
               )}
             </div>
 
+            {/* Affichage des catégories */}
             {!selectedCategory && (
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-2 gap-4">
                 {categories.map((category) => (
@@ -103,6 +105,7 @@ function Portfolio() {
               </div>
             )}
 
+            {/* Affichage des images d'une catégorie sélectionnée */}
             {selectedCategory && (
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
                 {displayedImages.map((image, index) => (
@@ -122,6 +125,7 @@ function Portfolio() {
             )}
           </div>
 
+          {/* Affichage en grand des images (zoom) */}
           {zoomedImage && (
             <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50">
               <div className="relative">
