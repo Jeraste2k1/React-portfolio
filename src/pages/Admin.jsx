@@ -38,7 +38,7 @@ useEffect(() => {
 
     if (token && expiration) {
       const now = Date.now();
-      if (now >= expiration) {
+      if (!token || (expiration && Date.now() >= expiration)) {
         toast.warn("⚠️ Session expirée, veuillez vous reconnecter.");
         localStorage.removeItem("token");
         localStorage.removeItem("token_expiration");
@@ -243,7 +243,8 @@ const removeFile = (index) => {
       return; // ✅ Empêche l'utilisateur de poursuivre avec des fichiers trop lourds
     }
   
-    setFileInput(selectedFiles);
+    setFileInput(prev => [...prev, ...selectedFiles]);
+
     setFilePreview(prevPreviews => [
       ...prevPreviews, 
       ...selectedFiles.map(file => URL.createObjectURL(file))
@@ -291,7 +292,7 @@ const removeFile = (index) => {
   
 
   // Bascule du statut "published" d'un fichier en utilisant son ID
-  const togglePublish = async (fileId) => {  // fileId est censé être filename
+  const togglePublish = async (fileId) => {
     console.log("📤 Token envoyé dans le header :", localStorage.getItem("token"));
     console.log("🔑 Token stocké dans localStorage :", localStorage.getItem("token"));
   
